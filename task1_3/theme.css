@@ -1,0 +1,45 @@
+body {
+    font-size: 16px;
+    font-family:"微软雅黑";
+}
+
+div {
+    background: #EEE;
+    border:1px solid #999;
+}
+
+#main{
+    padding: 20px;
+    float: left;
+}
+
+#left
+{
+    float: left;
+    width: 200px;
+    background: #FFF;
+    padding: 10px 0px 10px 0px;
+
+}
+#left img {
+    float: left;
+    margin: 0px 20px 0px 10px;
+}
+#right {
+    float: right;
+    width: 120px;
+    background: #FFF;
+
+    text-align: center; /* 实现水平居中 */
+    vertical-align: middle; /*实现垂直居中*/
+    padding: 15px 0px ;
+
+}
+
+#content {
+    margin: 0px 240px 20px 320px;
+    background: #FFF;
+    padding: 20px;
+    text-indent:35px;
+
+}
