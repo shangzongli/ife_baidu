@@ -1,0 +1,150 @@
+html,
+body{
+    height: 100%;
+    margin:0;
+    padding:0;
+    font-size: 14px;
+    font-family:"微软雅黑";
+    background: #DDD;
+}
+
+#header img{
+    margin: 10px 0px 10px 20px;
+    vertical-align:middle;
+}
+
+#header a:link {
+    color:#FF0000;
+    text-decoration:none;
+}
+#header a:visited {
+    color:#FFFFFF;
+    text-decoration:none;
+}
+#header a:hover {
+    color:#000000;
+    text-decoration:none;
+}
+#header a:active {
+    color:#00FF00;
+    text-decoration:none;
+}
+.headli{
+    float:left;
+    margin: 10px 30px;
+}
+#headul{
+    float: right;
+}
+
+
+#container {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;/*margin-bottom的负值等于footer高度*/
+}
+.push,
+#footer {
+    height: 60px;
+    clear:both;
+}
+/*==========其他div效果==========*/
+#header {
+    background: #333;
+}
+
+#content{
+    margin: 20px;
+    margin-right: 480px;
+}
+#right {
+    width: 420px;
+    float: right;
+    margin-right: 20px;
+    background: #FFF;
+}
+
+#footer {
+    width:100%;
+
+    text-align:center;
+    line-height:60px;
+    color:#FFFFFF;
+    background:black;
+}
+
+hr{
+    float: left;
+    margin: 30px 15px 0 30px;
+}
+
+.contentdiv{
+    background: #FFF;
+    margin: 10px 0  10px 0;
+    padding: 20px;
+
+
+}
+p{
+    text-indent:35px;
+}
+h3{
+color: #999;
+}
+h4{
+    color: #999;
+}
+
+.divimg {
+    display: inline-block;
+    border:1px solid #999;
+    margin: 10px;
+    padding: 5px;
+}
+
+.divimg img {
+}
+
+.customers
+{
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+    width:100%;
+    border-collapse:collapse;
+}
+.customers td, #customers th
+{
+    font-size:1em;
+    border:1px solid #98bf21;
+    padding:3px 7px 2px 7px;
+}
+.customers th
+{
+    font-size:1.1em;
+    text-align:left;
+    padding-top:5px;
+    padding-bottom:4px;
+    background-color:#A7C942;
+    color:#ffffff;
+}
+.customers tr.alt td
+{
+    color:#000000;
+    background-color:#EAF2D3;
+}
+.formleft{
+    text-align:right;
+    float: left;
+    margin: 10px 10px 10px 50px;
+}
+.formright{
+    text-align:left;
+    margin: 10px;
+    padding: 10px;
+}
+label{
+
+}
+input{
+margin-bottom: 15px;
+}
