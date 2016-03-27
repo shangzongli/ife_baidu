@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 10px;
+        }
+
+    </style>
+    <script type="text/javascript">
+        var canvas;
+        var context;
+        var interval=40;
+        var num=10;
+        
+        var initturn=2%4;//left
+        var specialBox={x:6,y:6,turn:initturn};
+
+        function clearspecialBox() {
+            if(specialBox.x>num||specialBox.x<1||specialBox.y>num||specialBox.y<1)
+                return;
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            context.clearRect(specialBox.x*interval+1,specialBox.y*interval+1,interval-2,interval-2);
+
+        }
+
+        function drawspecialBox() {
+            if(specialBox.x>num||specialBox.x<=0||specialBox.y>num||specialBox.y<=0)
+                    return;
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            var RedBox;
+            var BlueBox;
+            switch(specialBox.turn)
+            {
+                case 1://left
+                    RedBox={x:1/4,y:0,wid:3/4,hig:1,marginmin:[0,1,-1,-2]};//marginmin为小范围移动的x、y、wid、hig
+                    BlueBox={x:0,y:0,wid:1/4,hig:1,marginmin:[1,1,0,-2]};
+                    break;
+                case 3://"right"
+                    RedBox={x:0,y:0,wid:3/4,hig:1,marginmin:[1,1,0,-2]};
+                    BlueBox={x:3/4,y:0,wid:1/4,hig:1,marginmin:[0,1,-1,-2]};
+                    break;
+                case 0://"top"
+                    RedBox={x:0,y:1/4,wid:1,hig:3/4,marginmin:[1,0,-2,-1]};
+                    BlueBox={x:0,y:0,wid:1,hig:1/4,marginmin:[1,1,-2,0]};
+                    break;
+                case 2://"bottom"
+                    RedBox={x:0,y:0,wid:1,hig:3/4,marginmin:[1,1,-2,0]};
+                    BlueBox={x:0,y:3/4,wid:1,hig:1/4,marginmin:[1,0,-2,-1]};
+                    break;
+                default:
+            }
+            context.fillStyle = "#FF0000";//red
+            context.fillRect((RedBox.x+specialBox.x)*interval+RedBox.marginmin[0],(RedBox.y+specialBox.y)*interval+RedBox.marginmin[1],interval*RedBox.wid+RedBox.marginmin[2],interval*RedBox.hig+RedBox.marginmin[3]);
+            context.fillStyle = "#0000FF";//blue
+            context.fillRect((BlueBox.x+specialBox.x)*interval+BlueBox.marginmin[0],(BlueBox.y+specialBox.y)*interval+BlueBox.marginmin[1],interval*BlueBox.wid+BlueBox.marginmin[2],interval*BlueBox.hig+BlueBox.marginmin[3]);
+        }
+
+        function drawRect() {//页面加载完毕调用函数，初始化
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+            for (var i = 0; i <= num; i += 1) {
+                context.beginPath();
+                context.moveTo(interval, (i+1)*interval);
+                context.lineTo((num+1)*interval, (i+1)*interval);
+                context.closePath();
+                if(i==0||i==(num))
+                    context.strokeStyle="#000000";
+                context.stroke();
+                context.strokeStyle="#e7e7e7";
+
+                context.beginPath();
+                context.moveTo((i+1)*interval, interval);
+                context.lineTo((i+1)*interval, (num+1)*interval);
+                context.closePath();
+                if(i==0||i==(num))
+                    context.strokeStyle="#000000";
+                context.stroke();
+                context.strokeStyle="#e7e7e7";
+            }
+
+            for (var i = 1; i <= num; i += 1) {
+                context.font = "bold 20px serif";
+                context.fillText(i, interval/3, (i+3/4) * interval);
+                context.fillText(i, (i+1/4) * interval, interval*3/4);
+            }
+            drawspecialBox();
+        }
+
+        function execute() {
+            switch(document.getElementById("command").value.toLocaleUpperCase())
+            {
+                case "GO":
+                    clearspecialBox();
+                    switch(specialBox.turn)
+                    {
+                        case 1://left
+                            if(specialBox.x>1)
+                                specialBox.x-=1;
+                            break;
+                        case 3://"right"
+                            if(specialBox.x<num)
+                                specialBox.x+=1;
+                            break;
+                        case 0://"top"
+                            if(specialBox.y>1)
+                                specialBox.y-=1;
+                            break;
+                        case 2://"bottom"
+                            if(specialBox.y<num)
+                                specialBox.y+=1;
+                            break;
+                        default:
+                    }
+
+                    drawspecialBox();
+                    break;
+                case "TUN LEF":
+                    specialBox.turn=(specialBox.turn+1)%4;
+                    clearspecialBox();
+                    drawspecialBox();
+                    break;
+                case "TUN RIG":
+                    specialBox.turn=(specialBox.turn+3)%4;
+                    clearspecialBox();
+                    drawspecialBox();
+                    break;
+                case "TUN BAC":
+                    specialBox.turn=(specialBox.turn+2)%4;
+                    clearspecialBox();
+                    drawspecialBox();
+                    break;
+                case "TRA LEF"://向屏幕的左侧移动一格，方向不变
+                    clearspecialBox();
+                    if(specialBox.x>1)
+                        specialBox.x-=1;
+                    drawspecialBox();
+                    break;
+                case "TRA TOP"://向屏幕的上面移动一格，方向不变
+                    clearspecialBox();
+                    if(specialBox.y>1)
+                        specialBox.y-=1;
+                    drawspecialBox();
+                    break;
+                case "TRA RIG"://向屏幕的右侧移动一格，方向不变
+                    clearspecialBox();
+                    if(specialBox.x<num)
+                        specialBox.x+=1;
+                    drawspecialBox();
+                    break;
+                case "TRA BOT"://向屏幕的下面移动一格，方向不变
+                    clearspecialBox();
+                    if(specialBox.y<num)
+                        specialBox.y+=1;
+                    drawspecialBox();
+                    break;
+                case "MOV LEF"://方向转向屏幕左侧，并向屏幕的左侧移动一格
+                    clearspecialBox();
+                    specialBox.turn=1;
+                    if(specialBox.x>1)
+                        specialBox.x-=1;
+
+                    drawspecialBox();
+                    break;
+                case "MOV TOP"://方向转向屏幕上面，向屏幕的上面移动一格
+
+                    clearspecialBox();
+                    specialBox.turn=0;
+                    if(specialBox.x>1)
+                        specialBox.y-=1;
+                    drawspecialBox();
+                    break;
+                case "MOV RIG"://方向转向屏幕右侧，向屏幕的右侧移动一格
+                    clearspecialBox();
+                    specialBox.turn=3;
+                    if(specialBox.x>1)
+                        specialBox.x+=1;
+
+                    drawspecialBox();
+                    break;
+                case "MOV BOT"://方向转向屏幕下面，向屏幕的下面移动一格
+                    clearspecialBox();
+                    specialBox.turn=2;
+                    if(specialBox.x>1)
+                        specialBox.y+=1;
+
+                    drawspecialBox();
+                    break;
+                default:
+
+            }
+        }
+
+    </script>
+</head>
+<body onload="drawRect()">
+    <canvas width="520" id="canvas"  height="460">
+        你的浏览器不支持HTML5 canvas  ，请使用 google chrome 浏览器 打开.
+    </canvas>
+    <br>
+    <input type="text" id="command" style="margin-left: 40px">
+    <button onclick="execute()">执行</button>
+
+</div>
+
+</body>
+</html>
