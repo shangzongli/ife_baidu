@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="task20.css" />
+</head>
+
+<body>
+<textarea id="input2" ></textarea>
+<div id="button1">
+<button type="button" id="leftin" onclick="lefti()">左侧入</button>
+<button type="button" id="leftout" onclick="lefto()">左侧出</button>
+<button type="button" id="rightin" onclick="righti()">右侧入</button>
+<button type="button" id="rightout" onclick="righto()">右侧出</button>
+<input type="text" name="input-num" id="input-num" value="" />
+<button type="button" id="match1" onclick="match()">匹配</button>
+    </div>
+<div id="output"></div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+
+    var arr1=[5,6];
+    var input=document.getElementById('input-num');
+    var output=document.getElementById('output');
+    var lin=document.getElementById('leftin');
+    var lout=document.getElementById('leftout');
+    var rtin=document.getElementById('rightin');
+    var rout=document.getElementById('rightout');
+    var input2=document.getElementById('input2');
+    var arrm=[];
+    var i=0;
+    var j=-1;
+    var num;
+    var arr2=[];
+    var a;
+    a=555555;
+    num=0;
+    function match(){
+
+        var oLi = document.getElementsByTagName('li');
+        for(i=0;i<oLi.length;i++)
+        {
+            oLi[i].style.backgroundColor="white";
+        }
+        var str=input.value;
+        for(i=0;i<oLi.length;i++)
+        {
+            var a=arr2[i];
+            var b=oLi[i].innerHTML;
+            if(b.match(str)){
+                oLi[i].style.backgroundColor="#FF0000";
+            }
+        }
+    }
+    function lefti(){
+          //  var pushValue = input.value;
+            var p1 = document.createElement('li');
+            //  p1.innerHTML = input.value;
+            var oLi = document.getElementsByTagName('li');
+               // document.getElementById('output').insertBefore(p1, oLi[0]);
+               // var rout=document.getElementById('rightout');
+             //   oLi[0].style.height=pushValue*5+'px';
+        var x=input2.value;
+        j++;
+        i=0;
+        arr2[j]=x[i];
+        for( i=1;i< x.length;i++){
+            if((x[i]==" "&&x[i+1]!=' ')||(x[i]==';')||(x[i]==','))
+            {
+                i++;
+                j++;
+                arr2[j] = x[i];
+            }
+            else {
+                if (x[i] != " ") {
+                    arr2[j] = arr2[j] + x[i];
+                    num = 1;
+                }
+            }
+
+        }
+       // alert(arr2);
+        var count,count2,count3;
+        count2=oLi.length;
+         count3=arr2.length-oLi.length;
+        for(count=arr2.length-1;count-count2>=0;count--){
+             p1 = document.createElement('li');
+            document.getElementById('output').insertBefore(p1, oLi[0]);
+            oLi[0].innerHTML=arr2[count];
+        }
+
+
+    }
+    function lefto(){
+
+        var oLi=document.getElementsByTagName('li');
+        //  alert(oLi[0].innerHTML);
+        document.getElementById('output').removeChild(oLi[0]);
+
+    }
+    function righti(){
+        //  var pushValue = input.value;
+        var p1 = document.createElement('li');
+        //  p1.innerHTML = input.value;
+        var oLi = document.getElementsByTagName('li');
+        // document.getElementById('output').insertBefore(p1, oLi[0]);
+        // var rout=document.getElementById('rightout');
+        //   oLi[0].style.height=pushValue*5+'px';
+        var x=input2.value;
+        j++;
+        i=0;
+        arr2[j]=x[i];
+        for( i=1;i< x.length;i++){
+            if((x[i]==" "&&x[i+1]!=' ')||(x[i]==';')||(x[i]==','))
+            {
+                i++;
+                j++;
+                arr2[j] = x[i];
+            }
+            else {
+                if (x[i] != " ") {
+                    arr2[j] = arr2[j] + x[i];
+                    num = 1;
+                }
+            }
+
+        }
+        //alert(arr2);
+        var count,count2,count3,count1;
+        count2=oLi.length;
+        count1=oLi.length;
+        for(count1;count1<arr2.length;count1++){
+            p1 = document.createElement('li');
+            document.getElementById('output').insertBefore(p1, oLi[oLi.length]);
+            oLi[oLi.length-1].innerHTML=arr2[count1];
+        }
+
+
+
+    }
+    function  righto(){
+        var oLi=document.getElementsByTagName('li');
+        //   alert(oLi[oLi.length-1].innerHTML);
+        document.getElementById('output').removeChild(oLi[oLi.length-1]);
+    }
+    function  showarr(){
+        output.write(arr1);
+        // document.write(arr1);
+    }
+
+</script>

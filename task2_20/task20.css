@@ -1,0 +1,13 @@
+#output li{
+   color:black;margin-right: 10px;
+    float: left;list-style-type:none;
+    border-color: black;
+    border-style: solid;
+}
+#input2{
+    float: left;
+    margin-right: 10px;
+}
+#button1{
+    height: 50px;
+}
